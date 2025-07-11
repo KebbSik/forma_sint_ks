@@ -291,7 +291,7 @@ let metaDescription = document.querySelector('meta[name="description"]');
 if (!metaDescription) {
   metaDescription = document.createElement("meta");
   metaDescription.name = "description";
-  metaDescription.content = "Forma Sint – Domyślny opis";
+  metaDescription.content = "Forma Sint";
   document.head.appendChild(metaDescription);
 }
 
@@ -339,3 +339,10 @@ window.addEventListener("scroll", updateTitleAndHash);
 
 // Initial
 updateTitleAndHash();
+
+// #TODO
+// na localhost wszystko działa
+
+// https://kebbsik.github.io/forma_sint_ks/
+// z użyciem github pages strona wyświetla sie poprawnie przy pierwszym załadowaniu,
+// po odwieżeniu wyskakuje error 404 ; do poprawy - prawdopodbnie chodzi o hash (zmienic na forma_sint_ks/ )
