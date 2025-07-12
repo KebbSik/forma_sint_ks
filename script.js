@@ -181,7 +181,7 @@ const banner = `
             <button class="checkout-btn inter-text">
               <span>Check this out</span>
               <img
-                src="/assets/ICONS=chevron_right.svg"
+                src="assets/ICONS=chevron_right.svg"
                 alt="chevron-right"
                 loading="lazy"
               />
@@ -249,7 +249,7 @@ numberSelect.addEventListener("change", () => {
             <button class="checkout-btn inter-text">
               <span>Check this out</span>
               <img
-                src="/assets/ICONS=chevron_right.svg"
+                src="assets/ICONS=chevron_right.svg"
                 alt="chevron-right"
                 loading="lazy"
               />

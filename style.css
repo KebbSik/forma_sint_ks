@@ -100,14 +100,14 @@ header {
   justify-content: space-between;
 }
 .nav-logo {
-  background-image: url("/assets/FORMA ICON=Default.svg");
+  background-image: url("assets/FORMA ICON=Default.svg");
   display: inline-block;
   height: 24px;
   transition: background 0.15s ease-in-out;
   width: 24px;
 }
 .nav-logo:hover {
-  background-image: url(/assets/FORMA\ ICON=Fill.svg);
+  background-image: url(assets/FORMA\ ICON=Fill.svg);
 }
 .nav-desktop > * {
   align-items: center;
@@ -323,7 +323,7 @@ section {
 }
 .slide-image-container .like-button {
   background-size: contain;
-  background: url("/assets/FAV ICON=Default.svg") no-repeat center;
+  background: url("assets/FAV ICON=Default.svg") no-repeat center;
   border: none;
   cursor: pointer;
   height: 24px;
@@ -334,7 +334,7 @@ section {
   width: 24px;
 }
 .slide-image-container .like-button.liked {
-  background-image: url("/assets/FAV ICON=Fill.svg");
+  background-image: url("assets/FAV ICON=Fill.svg");
 }
 .slide-image-container .label {
   border-radius: 1000px;
@@ -503,7 +503,7 @@ button {
 }
 .menu-close-btn {
   background-size: contain;
-  background: url("/assets/ICONS=CLOSE.svg") no-repeat center;
+  background: url("assets/ICONS=CLOSE.svg") no-repeat center;
   border: none;
   cursor: pointer;
   height: 24px;
@@ -511,7 +511,7 @@ button {
 }
 .modal-close-btn {
   background-size: contain;
-  background: url("/assets/ICONS=CLOSE.svg") no-repeat center;
+  background: url("assets/ICONS=CLOSE.svg") no-repeat center;
   border: none;
   cursor: pointer;
   height: 24px;
