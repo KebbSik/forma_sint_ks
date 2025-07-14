@@ -1,3 +1,8 @@
+if (window.location.hostname === "kebbsik.github.io") {
+  const base = document.createElement("base");
+  base.href = "/forma_sint_ks/";
+  document.head.appendChild(base);
+}
 /* ------------ Side Menu  ------------ */
 const menuBtn = document.getElementById("menu-btn");
 const modal = document.getElementById("side-menu-modal");
@@ -325,6 +330,7 @@ function updateTitleAndHash() {
 
         // set Meta description
         metaDescription.content = sectionDescriptions[id] || "Forma Sint";
+        // currentHash = id;
       }
 
       found = true;
