@@ -304,6 +304,19 @@ if (!metaDescription) {
   document.head.appendChild(metaDescription);
 }
 
+// Title and hash update delayer
+// Throttled to prevent excessive updates and cursor appearance issues on scroll.
+function throttle(func, limit) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      func.apply(this, args);
+    }
+  };
+}
+
 // Update title and hash function
 function updateTitleAndHash() {
   let found = false;
@@ -344,15 +357,6 @@ function updateTitleAndHash() {
     currentHash = "";
   }
 }
-// Update hash onScroll
-window.addEventListener("scroll", updateTitleAndHash);
 
 // Initial
-updateTitleAndHash();
-
-// #TODO
-// na localhost wszystko działa
-
-// https://kebbsik.github.io/forma_sint_ks/
-// z użyciem github pages strona wyświetla sie poprawnie przy pierwszym załadowaniu,
-// po odwieżeniu wyskakuje error 404 ; do poprawy - prawdopodbnie chodzi o hash (zmienic na forma_sint_ks/ )
+window.addEventListener("scroll", throttle(updateTitleAndHash, 500));
