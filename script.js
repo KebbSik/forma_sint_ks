@@ -37,6 +37,10 @@ document.addEventListener("keydown", (e) => {
 
 /* ------------ Swiper config  ------------ */
 const swiper = new Swiper(".mySwiper", {
+  lazy: true,
+  // lazy: {
+  //   loadPrevNext: true,
+  // },
   loop: true,
   navigation: {
     nextEl: ".next-btn",
@@ -314,7 +318,7 @@ function updateTitleAndHash() {
         document.title = sectionTitles[id] || "Forma Sint";
 
         if (id === "home") {
-          history.replaceState(null, null, "/");
+          history.replaceState(null, null, "");
         } else {
           history.replaceState(null, null, `#${id}`);
         }
