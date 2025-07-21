@@ -6,7 +6,7 @@ if (window.location.hostname === "kebbsik.github.io") {
 /* ------------ Side Menu  ------------ */
 const menuBtn = document.getElementById("menu-btn");
 const modal = document.getElementById("side-menu-modal");
-const closeBtn = document.querySelector(".menu-close-btn");
+const closeBtn = document.querySelector(".menu-close-wrapper");
 const menuLinks = document.querySelectorAll(".menu-items a");
 
 menuBtn.addEventListener("click", () => {
@@ -46,10 +46,14 @@ const swiper = new Swiper(".mySwiper", {
   // lazy: {
   //   loadPrevNext: true,
   // },
-  loop: true,
+  // loop: true,
   navigation: {
     nextEl: ".next-btn",
     prevEl: ".prev-btn",
+  },
+  on: {
+    init: toggleNavButtons,
+    slideChange: toggleNavButtons,
   },
   pagination: {
     el: ".swiper-pagination",
@@ -60,7 +64,8 @@ const swiper = new Swiper(".mySwiper", {
   breakpoints: {
     0: {
       slidesPerView: 1.2,
-      centeredSlides: true,
+      // centeredSlides: true,
+      centeredSlides: false,
     },
     768: {
       slidesPerView: 2,
@@ -77,6 +82,14 @@ const swiper = new Swiper(".mySwiper", {
   },
 });
 
+function toggleNavButtons(swiper) {
+  const prev = swiper.navigation.prevEl;
+  const next = swiper.navigation.nextEl;
+
+  prev.style.display = swiper.isBeginning ? "none" : "";
+  next.style.display = swiper.isEnd ? "none" : "";
+}
+
 /* ------------ Like btn ------------ */
 const likeButtons = document.querySelectorAll(".like-button");
 
@@ -87,8 +100,41 @@ likeButtons.forEach((btn) => {
   });
 });
 
-/* ------------ Listing products ------------ */
+/* ------------ Custom select  ------------ */
 const numberSelect = document.getElementById("number-select");
+const customSelect = document.querySelector(".custom-select");
+const selected = document.querySelector(".selected");
+const selectedValue = document.querySelector(".selected span");
+const options = document.querySelector(".options");
+const activeValue = document.querySelector(".active-value span");
+
+selected.addEventListener("click", () => {
+  customSelect.classList.toggle("open");
+});
+
+options.addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    let placeHolder = selectedValue.textContent;
+    selectedValue.textContent = e.target.textContent;
+    numberSelect.value = e.target.textContent;
+    activeValue.textContent = e.target.textContent;
+    activeValue.valueset = e.target.textContent;
+
+    e.target.textContent = placeHolder;
+    changeProductNumber();
+
+    customSelect.classList.remove("open");
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!customSelect.contains(e.target)) {
+    customSelect.classList.remove("open");
+  }
+});
+
+/* ------------ Listing products ------------ */
+
 const productModal = document.getElementById("product-modal");
 
 let currentPage = 1;
@@ -112,7 +158,7 @@ document.querySelectorAll(".slide-container").forEach((container) => {
   });
 });
 
-// create single prdocunt
+// create single product
 function createProductElement(item) {
   const product = document.createElement("div");
   product.className = "slide-image-container";
@@ -124,19 +170,28 @@ function createProductElement(item) {
   const img = document.createElement("img");
   img.src = item.image;
 
-  // I could not find different sizes of images in API;
-  // added because 'srcset' is included in SEO requirements
-  img.srcset = `
-  ${item.image} 400w,
-  ${item.image} 600w,
-  ${item.image} 800w
-`;
+  // !!! UPDATE !!!
+  // Item response:
+  //   {
+  //     "id": 1,
+  //     "text": "test 1",
+  //     "image": "https://brandstestowy.smallhost.pl/KURTKA_02.png"
+  // }
+  //'srcset' is included in SEO requirements but
+  // as a single response do not return images in different dimensions, no srcset is needed
 
-  img.sizes = `
-  (max-width: 769px) 420px,
-  (max-width: 1279px) 460px,
-  570px
-`;
+  //   img.srcset = `
+  //   ${item.image} 400w,
+  //   ${item.image} 600w,
+  //   ${item.image} 800w
+  // `;
+
+  //   img.sizes = `
+  //   (max-width: 769px) 420px,
+  //   (max-width: 1279px) 460px,
+  //   570px
+  // `;
+
   img.loading = "lazy";
   img.alt = item.text;
 
@@ -159,9 +214,11 @@ function createProductElement(item) {
 }
 
 // Close on clicking close btn
-document.querySelector(".modal-close-btn").addEventListener("click", () => {
-  productModal.classList.add("hidden");
-});
+document
+  .querySelector(".prdouct-close-wrapper")
+  .addEventListener("click", () => {
+    productModal.classList.add("hidden");
+  });
 
 // Close on clicking outside the modal
 productModal.addEventListener("click", (e) => {
@@ -185,7 +242,7 @@ const banner = `
           <div class="ad-content-container">
             <div class="ad-description">
               <span>Forma’sint.</span>
-              <h1>You'll look and feel like the champion.</h1>
+              <h2>You'll look and feel like the champion.</h2>
             </div>
             <button class="checkout-btn inter-text">
               <span>Check this out</span>
@@ -197,6 +254,9 @@ const banner = `
             </button>
           </div>
         </div>`;
+
+// render banner
+grid.innerHTML = banner;
 
 async function loadProducts() {
   if (isLoading) return;
@@ -239,7 +299,8 @@ window.addEventListener("scroll", () => {
 });
 
 // Change number of products
-numberSelect.addEventListener("change", () => {
+// numberSelect.addEventListener("change", () =>
+function changeProductNumber() {
   pageSize = parseInt(numberSelect.value);
   currentPage = 1;
   productsLoaded = 0;
@@ -249,29 +310,17 @@ numberSelect.addEventListener("change", () => {
     .querySelectorAll(".grid .slide-image-container")
     .forEach((slide) => slide.classList.add("fade-out"));
   setTimeout(() => {
-    grid.innerHTML = `<div class="ad" id="banner">
-          <div class="ad-content-container">
-            <div class="ad-description">
-              <span>Forma’sint.</span>
-              <h1>You'll look and feel like the champion.</h1>
-            </div>
-            <button class="checkout-btn inter-text">
-              <span>Check this out</span>
-              <img
-                src="assets/ICONS=chevron_right.svg"
-                alt="chevron-right"
-                loading="lazy"
-              />
-            </button>
-          </div>
-        </div>`; //reset grid
+    grid.innerHTML = banner;
+
+    //reset grid
     loadProducts();
   }, 200);
 
   // Version without animation
   //  grid.innerHTML = "";
   // loadProducts();
-});
+}
+// );
 
 // Initial producs loading
 loadProducts();

@@ -37,9 +37,8 @@
           />
           <span>Frontend developer</span>
         </div>
-        <div class="menu nav-show">
+        <div id="menu-btn" class="menu nav-show">
           <img
-            id="menu-btn"
             class="small-icon"
             src="assets/ICONS=MENU_HAMBURGER.svg"
             alt="User Icon"
@@ -54,8 +53,8 @@
           <div class="nav-left-panel">
             <span class="logo-name-container">
               <a class="nav-logo" href="/"></a>
-              <span class="modal-close"
-                ><button class="menu-close-btn"></button>Close</span
+              <span class="modal-close menu-close-wrapper"
+                ><button class="close-btn"></button>Close</span
               >
             </span>
           </div>
@@ -69,6 +68,7 @@
         </div>
       </div>
     </header>
+
     <!-- HOME -->
     <section id="home">
       <div class="logo-container">
@@ -103,7 +103,7 @@
               <div class="swiper-slide">
                 <div class="slide-container">
                   <div class="slide-image-container">
-                    <span class="label bestseller">Bestseller</span>
+                    <span class="label bestseller inter-text">Bestseller</span>
                     <button
                       class="like-button"
                       aria-label="Like this product"
@@ -127,7 +127,9 @@
               <div class="swiper-slide">
                 <div class="slide-container">
                   <div class="slide-image-container">
-                    <span class="label limited-edition">Limited edition</span>
+                    <span class="label limited-edition inter-text"
+                      >Limited edition</span
+                    >
                     <button
                       class="like-button"
                       aria-label="Like this product"
@@ -174,7 +176,7 @@
               <div class="swiper-slide">
                 <div class="slide-container">
                   <div class="slide-image-container">
-                    <span class="label bestseller">Bestseller</span>
+                    <span class="label bestseller inter-text">Bestseller</span>
                     <button
                       class="like-button"
                       aria-label="Like this product"
@@ -198,7 +200,9 @@
               <div class="swiper-slide">
                 <div class="slide-container">
                   <div class="slide-image-container">
-                    <span class="label limited-edition">Limited edition</span>
+                    <span class="label limited-edition inter-text"
+                      >Limited edition</span
+                    >
                     <button
                       class="like-button"
                       aria-label="Like this product"
@@ -262,31 +266,40 @@
     <section id="product-list">
       <div class="select-container">
         <label for="number-select">Number of products per page</label>
-        <select id="number-select" name="number-select" class="custom-select">
-          <option value="14" selected>14</option>
-          <option value="24">24</option>
-          <option value="36">36</option>
-        </select>
-      </div>
-      <!-- grid -->
-      <div class="grid" id="product-grid">
-        <div class="ad" id="banner">
-          <div class="ad-content-container">
-            <div class="ad-description">
-              <span>Forma’sint.</span>
-              <h1>You'll look and feel like the champion.</h1>
-            </div>
-            <button class="checkout-btn inter-text">
-              <span>Check this out</span>
+        <!-- Custom select test -->
+        <div class="custom-select">
+          <div class="selected">
+            <span>14</span>
+            <img
+              class="small-icon"
+              src="assets/ICONS=chevron_down.svg"
+              alt="Chevron down"
+              loading="lazy"
+            />
+          </div>
+          <ul class="options">
+            <li class="active-value" data-value="14">
+              <span>14</span>
               <img
-                src="assets/ICONS=chevron_right.svg"
-                alt="chevron-right"
+                class="small-icon"
+                src="assets/ICONS=chevron_down.svg"
+                alt="Chevron down"
                 loading="lazy"
               />
-            </button>
-          </div>
+            </li>
+            <li data-value="24">24</li>
+            <li data-value="36">36</li>
+          </ul>
         </div>
+        <input
+          type="hidden"
+          id="number-select"
+          name="number-selector"
+          value="14"
+        />
       </div>
+      <!-- grid -->
+      <div class="grid" id="product-grid"></div>
     </section>
     <!-- Modal product -->
     <div id="product-modal" class="modal hidden">
@@ -294,8 +307,8 @@
         <div class="modal-content">
           <div class="modal-label">
             <p id="modal-text"></p>
-            <span class="modal-close"
-              ><button class="modal-close-btn"></button>Close</span
+            <span class="modal-close prdouct-close-wrapper"
+              ><button class="close-btn"></button>Close</span
             >
           </div>
           <div class="modal-image-container">
