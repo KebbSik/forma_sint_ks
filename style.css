@@ -400,6 +400,7 @@ section {
 
 .active-value {
   border-bottom: 1px solid var(--color-primary-black);
+  /* pointer-events: none; */
 }
 
 .options {
@@ -416,7 +417,7 @@ section {
   margin: 0;
   z-index: 10;
   list-style: none;
-  width: auto;
+  min-width: 50px;
   transition: max-height 0.3s ease-in-out, border 0.6s ease-in-out;
   padding: 0 12px;
   max-height: 0px;

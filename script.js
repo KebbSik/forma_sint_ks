@@ -117,10 +117,15 @@ options.addEventListener("click", (e) => {
     let placeHolder = selectedValue.textContent;
     selectedValue.textContent = e.target.textContent;
     numberSelect.value = e.target.textContent;
-    activeValue.textContent = e.target.textContent;
-    activeValue.valueset = e.target.textContent;
+    console.log(parseInt(activeValue.textContent));
+    console.log(parseInt(e.target.textContent));
 
-    e.target.textContent = placeHolder;
+    if (e.target.classList.length === 0) {
+      activeValue.textContent = e.target.textContent;
+      activeValue.valueset = e.target.textContent;
+      e.target.textContent = placeHolder;
+    }
+
     changeProductNumber();
 
     customSelect.classList.remove("open");
