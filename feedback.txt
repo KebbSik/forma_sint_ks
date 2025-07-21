@@ -1,0 +1,32 @@
+1.ramka rekomendacji produktów - wygląda to inaczej niż na projekcie. Głównie rzucają się w oczy bardzo duże labelki. Strzałki potrzebują troszeczke odstępu od końca ramki i brakuje animacji na serduszko na hover.
+
+Zmieniono swiper tak, aby dla urządzeń mobilnych wyglądał, jak w projekcie (slajdy dochodzą do krawędzi ekranu), 'centeredSlides' = false (chociaż wg mnie true wygląda lepiej, podobnie jak loop)
+Przyciski widzialne jedynie, kiedy jest możliwość przewijania.
+
+Dodano odstępy strzałek od końca ramki. 
+Zminiejszono labele (poprzez dodanie klasy 'inter-text') 
+Dodano animację na serduszko na hover
+---------------------------
+2.Przyciski X Close i = Menu nie działają intuicyjnie. Da się nacisnąć tylko na ikonkę a nie też na napis.
+
+Poprawiono
+---------------------------
+3.lista rozwijana produktów to zwykły select a nie customowy. 
+
+Zmieniono select na customowy.
+---------------------------
+4.Dwa razy występuje h1. Jest to niezgodne z wytycznymi SEO
+
+Zastąpiono nadmiernie użyty h1.
+
+Za pierwszym razem użyłem h1 dwukrotnie, ponieważ :
+font-size dla h1 = 42px (32px mobile) = rozmiar czcionki w banerze = rozmiar czcionki w 'Browse featured'
+---------------------------
+5.kod js - srcset. W komentarzu jest informacja że jest to wymagane pod SEO, ale tak naprawdę tylko jeśli są różne zdjęcia na różne szerokości ekranu.
+
+Jako iż API zwraca jeden rozmiar zdjęcia, usunięto srcset
+---------------------------
+6.Nie wiem z czego to wynika ale HTML bannery jest zapisywany do zmiennej banner i później nie jest to używane tylko jeszcze raz jest HTML pisany
+
+Jest to mój błąd. Poprawiłem kod tak, aby funkcja renderująca produkty korzystała ze zmiennej 'banner'. Usunąłem także 
+kod bannera z HTML - jest on teraz renderowany jedynie w js. 
